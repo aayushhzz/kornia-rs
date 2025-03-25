@@ -399,12 +399,11 @@ mod tests {
         #[rustfmt::skip]
         let img = Image::<f32, 2>::new(
             size,
-            (0..25).flat_map(|x| [x as f32, x as f32 + 25.0]).collect(),
+            (0..25).into_iter().flat_map(|x| [x as f32, x as f32 + 25.0]).collect(),
         )?;
-        #[allow(clippy::type_complexity)]
-        static TEST_FUNCTIONS: &[(
+        static TEST_FUNCTIONS: &'static [(
             fn(&Image<f32, 2>, &mut Image<f32, 2>, &mut Image<f32, 2>) -> Result<(), ImageError>,
-            &str,
+            &'static str,
         )] = &[
             (spatial_gradient_float, "spatial_gradient_float"),
             (
